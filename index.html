@@ -35,6 +35,17 @@
             display: none;
             /* Additional styling for form */
         }
+
+        /* Order Posts */
+        .order-posts {
+            margin-top: 20px;
+        }
+
+        .order-post {
+            border: 1px solid #ddd;
+            padding: 10px;
+            margin-bottom: 10px;
+        }
     </style>
 </head>
 <body>
@@ -56,6 +67,9 @@
         <button id="submit-order">Submit</button>
     </div>
 
+    <!-- Order Posts -->
+    <div class="order-posts" id="order-posts"></div>
+
     <script>
         // Add event listener for the plus symbol to show the order form
         document.querySelector('.plus-symbol').addEventListener('click', function() {
@@ -65,25 +79,26 @@
         // Handle the order form submission
         document.querySelector('#submit-order').addEventListener('click', function() {
             const orderDetails = document.querySelector('#order-input').value;
-            const link = generateLink(orderDetails);
-            localStorage.setItem('orderReminder', JSON.stringify({ orderDetails, link }));
-            alert('Order form submitted! Here is your link: ' + link);
+            const orderPost = document.createElement('div');
+            orderPost.className = 'order-post';
+            orderPost.textContent = orderDetails;
+            document.getElementById('order-posts').appendChild(orderPost);
+            localStorage.setItem('orderReminder', JSON.stringify(orderDetails));
+            alert('Order form submitted!');
             document.getElementById('order-form').style.display = 'none'; // Hide the form after submission
+            document.querySelector('#order-input').value = ''; // Clear the input field
         });
 
         // Load reminder on page load
         window.addEventListener('load', function() {
             const savedReminder = JSON.parse(localStorage.getItem('orderReminder'));
             if (savedReminder) {
-                alert('You have a saved reminder: ' + savedReminder.orderDetails);
-                // Display reminder or populate form
+                const orderPost = document.createElement('div');
+                orderPost.className = 'order-post';
+                orderPost.textContent = savedReminder;
+                document.getElementById('order-posts').appendChild(orderPost);
             }
         });
-
-        // Function to generate a shareable link
-        function generateLink(orderDetails) {
-            return 'http://example.com/order?data=' + encodeURIComponent(orderDetails);
-        }
     </script>
 </body>
 </html>

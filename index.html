@@ -4,19 +4,88 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Shopping Website</title>
-    <link rel="stylesheet" href="styles.css">
+    <style>
+        /* Banner Style */
+        .banner {
+            background-color: pink;
+        }
+
+        /* Add Button Style */
+        .add-btn {
+            background-color: darkviolet;
+        }
+
+        /* Delete Button Style */
+        .delete-btn {
+            background-color: purple;
+        }
+
+        /* Plus Symbol */
+        .plus-symbol {
+            color: indigo;
+            position: fixed;
+            top: 10px;
+            right: 10px;
+            font-size: 24px;
+            cursor: pointer;
+        }
+
+        /* Order Form */
+        #order-form {
+            display: none;
+            /* Additional styling for form */
+        }
+    </style>
 </head>
 <body>
-    <header>
-        <h1>Shopping Website</h1>
-    </header>
-    <main>
-        <div class="reminder-section">
-            <input type="text" id="reminder-input" placeholder="Enter a reminder">
-            <button onclick="addReminder()">Add Reminder</button>
-            <ul id="reminder-list"></ul>
-        </div>
-    </main>
-    <script src="scripts.js"></script>
+    <div class="banner">
+        <!-- Banner Content -->
+    </div>
+
+    <button class="add-btn">Add</button>
+    <button class="delete-btn">Delete</button>
+
+    <div class="plus-symbol-container">
+        <button class="plus-symbol">&#x2b;</button>
+    </div>
+
+    <!-- Order Form -->
+    <div id="order-form">
+        <h2>Create Order Form</h2>
+        <!-- Include form fields here -->
+        <button id="submit-order">Submit</button>
+    </div>
+
+    <script>
+        // Add event listener for the plus symbol to show the order form
+        document.querySelector('.plus-symbol').addEventListener('click', function() {
+            document.getElementById('order-form').style.display = 'block';
+        });
+
+        // Handle the order form submission
+        document.querySelector('#submit-order').addEventListener('click', function() {
+            const formData = {/* Collect form data here */};
+            const link = generateLink(formData); // Function to generate shareable link
+            localStorage.setItem('orderReminder', JSON.stringify({ formData, link }));
+            // Show confirmation or reminder
+        });
+
+        // Load reminder on page load
+        window.addEventListener('load', function() {
+            const savedReminder = JSON.parse(localStorage.getItem('orderReminder'));
+            if (savedReminder) {
+                // Display the shared order form based on the link
+                // Example: populateForm(savedReminder.formData);
+                // Code to show reminder
+            }
+        });
+
+        // Function to generate a shareable link
+        function generateLink(formData) {
+            // Implement link generation logic here
+            return 'http://example.com/order?data=' + encodeURIComponent(JSON.stringify(formData));
+        }
+    </script>
 </body>
 </html>
+

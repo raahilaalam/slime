@@ -45,6 +45,15 @@
             border: 1px solid #ddd;
             padding: 10px;
             margin-bottom: 10px;
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .delete-reminder {
+            color: red;
+            cursor: pointer;
+            border: none;
+            background: none;
         }
     </style>
 </head>
@@ -71,6 +80,27 @@
     <div class="order-posts" id="order-posts"></div>
 
     <script>
+        // Function to create an order post element
+        function createOrderPost(orderDetails) {
+            const orderPost = document.createElement('div');
+            orderPost.className = 'order-post';
+
+            const orderText = document.createElement('span');
+            orderText.textContent = orderDetails;
+            orderPost.appendChild(orderText);
+
+            const deleteBtn = document.createElement('button');
+            deleteBtn.className = 'delete-reminder';
+            deleteBtn.textContent = 'Delete';
+            deleteBtn.addEventListener('click', function() {
+                orderPost.remove();
+                localStorage.removeItem('orderReminder');
+            });
+            orderPost.appendChild(deleteBtn);
+
+            return orderPost;
+        }
+
         // Add event listener for the plus symbol to show the order form
         document.querySelector('.plus-symbol').addEventListener('click', function() {
             document.getElementById('order-form').style.display = 'block';
@@ -79,9 +109,7 @@
         // Handle the order form submission
         document.querySelector('#submit-order').addEventListener('click', function() {
             const orderDetails = document.querySelector('#order-input').value;
-            const orderPost = document.createElement('div');
-            orderPost.className = 'order-post';
-            orderPost.textContent = orderDetails;
+            const orderPost = createOrderPost(orderDetails);
             document.getElementById('order-posts').appendChild(orderPost);
             localStorage.setItem('orderReminder', JSON.stringify(orderDetails));
             alert('Order form submitted!');
@@ -93,9 +121,7 @@
         window.addEventListener('load', function() {
             const savedReminder = JSON.parse(localStorage.getItem('orderReminder'));
             if (savedReminder) {
-                const orderPost = document.createElement('div');
-                orderPost.className = 'order-post';
-                orderPost.textContent = savedReminder;
+                const orderPost = createOrderPost(savedReminder);
                 document.getElementById('order-posts').appendChild(orderPost);
             }
         });

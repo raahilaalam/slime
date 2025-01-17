@@ -1,22 +1,28 @@
-function addReminder() {
-    const reminderInput = document.getElementById('reminder-input');
-    const reminderText = reminderInput.value;
+// Add event listener for the plus symbol to show the order form
+document.querySelector('.plus-symbol').addEventListener('click', function() {
+    document.getElementById('order-form').style.display = 'block';
+});
 
-    if (reminderText.trim() !== "") {
-        const reminderList = document.getElementById('reminder-list');
+// Handle the order form submission
+document.querySelector('#submit-order').addEventListener('click', function() {
+    const formData = {/* Collect form data here */};
+    const link = generateLink(formData); // Function to generate shareable link
+    localStorage.setItem('orderReminder', JSON.stringify({ formData, link }));
+    // Show confirmation or reminder
+});
 
-        const listItem = document.createElement('li');
-        listItem.textContent = reminderText;
-
-        const deleteButton = document.createElement('button');
-        deleteButton.textContent = 'Delete';
-        deleteButton.onclick = function() {
-            reminderList.removeChild(listItem);
-        };
-
-        listItem.appendChild(deleteButton);
-        reminderList.appendChild(listItem);
-
-        reminderInput.value = '';
+// Load reminder on page load
+window.addEventListener('load', function() {
+    const savedReminder = JSON.parse(localStorage.getItem('orderReminder'));
+    if (savedReminder) {
+        // Display the shared order form based on the link
+        // Example: populateForm(savedReminder.formData);
+        // Code to show reminder
     }
+});
+
+// Function to generate a shareable link
+function generateLink(formData) {
+    // Implement link generation logic here
+    return 'http://example.com/order?data=' + encodeURIComponent(JSON.stringify(formData));
 }

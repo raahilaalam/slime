@@ -1,67 +1,24 @@
-body {
-    font-family: Arial, sans-serif;
-    margin: 0;
-    padding: 0;
-    background-color: #f1f1f1;
+/* Banner Style */
+.banner {
+    background-color: pink;
 }
 
-header {
-    background-color: #FFC0CB;
-    color: white;
-    padding: 1rem;
-    text-align: center;
+/* Add Button Style */
+.add-btn {
+    background-color: darkviolet;
 }
 
-main {
-    padding: 2rem;
-}
-
-.reminder-section {
-    background-color: white;
-    padding: 1rem;
-    border-radius: 8px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-}
-
-#reminder-input {
-    padding: 0.5rem;
-    width: 70%;
-    margin-right: 1rem;
-}
-
-button {
-    padding: 0.5rem 1rem;
-    background-color: #947DCC;
-    color: white;
-    border: none;
-    cursor: pointer;
-    border-radius: 4px;
-}
-
-button:hover {
-    background-color: #E6E6FA;
-}
-
-ul {
-    list-style-type: none;
-    padding: 0;
-}
-
-li {
-    margin-top: 0.5rem;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    background-color: #f9f9f9;
-    padding: 0.5rem;
-    border-radius: 4px;
-}
-
-li button {
-    background-color: purple;
-    padding: 0.3rem 0.5rem;
-}
-
-li button:hover {
+/* Delete Button Style */
+.delete-btn {
     background-color: purple;
 }
+
+/* Plus Symbol */
+.plus-symbol {
+    color: indigo;
+    position: fixed;
+    top: 10px;
+    right: 10px;
+    font-size: 24px;
+}
+
